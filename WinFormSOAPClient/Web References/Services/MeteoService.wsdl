@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetEmployeesViaASMX">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEmployeesViaASMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmployeesViaASMXResult" type="tns:ArrayOfEmployee" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEmployee">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Employee" nillable="true" type="tns:Employee" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Employee">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EmployeeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPrevisione">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="citta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrevisioneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrevisioneResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTemperatura">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="citta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTemperaturaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetTemperaturaResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetEmployeesViaASMXSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmployeesViaASMX" />
+  </wsdl:message>
+  <wsdl:message name="GetEmployeesViaASMXSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmployeesViaASMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrevisioneSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrevisione" />
+  </wsdl:message>
+  <wsdl:message name="GetPrevisioneSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrevisioneResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTemperaturaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTemperatura" />
+  </wsdl:message>
+  <wsdl:message name="GetTemperaturaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTemperaturaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MeteoServiceSoap">
+    <wsdl:operation name="GetEmployeesViaASMX">
+      <wsdl:input message="tns:GetEmployeesViaASMXSoapIn" />
+      <wsdl:output message="tns:GetEmployeesViaASMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrevisione">
+      <wsdl:input message="tns:GetPrevisioneSoapIn" />
+      <wsdl:output message="tns:GetPrevisioneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemperatura">
+      <wsdl:input message="tns:GetTemperaturaSoapIn" />
+      <wsdl:output message="tns:GetTemperaturaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MeteoServiceSoap" type="tns:MeteoServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmployeesViaASMX">
+      <soap:operation soapAction="http://tempuri.org/GetEmployeesViaASMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrevisione">
+      <soap:operation soapAction="http://tempuri.org/GetPrevisione" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTemperatura">
+      <soap:operation soapAction="http://tempuri.org/GetTemperatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MeteoServiceSoap12" type="tns:MeteoServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEmployeesViaASMX">
+      <soap12:operation soapAction="http://tempuri.org/GetEmployeesViaASMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrevisione">
+      <soap12:operation soapAction="http://tempuri.org/GetPrevisione" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTemperatura">
+      <soap12:operation soapAction="http://tempuri.org/GetTemperatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MeteoService">
+    <wsdl:port name="MeteoServiceSoap" binding="tns:MeteoServiceSoap">
+      <soap:address location="http://localhost:20525/MeteoService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MeteoServiceSoap12" binding="tns:MeteoServiceSoap12">
+      <soap12:address location="http://localhost:20525/MeteoService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
