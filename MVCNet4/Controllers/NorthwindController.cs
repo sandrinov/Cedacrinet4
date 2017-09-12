@@ -7,6 +7,9 @@ using System.Web.Mvc;
 
 namespace MVCNet4.Controllers
 {
+    /// <summary>
+    /// Controller with Ninject as Ioc 
+    /// </summary>
     public class NorthwindCedController : Controller
     {
         private CommonNet4.IDBSource _db;
