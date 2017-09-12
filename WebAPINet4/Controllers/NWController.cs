@@ -21,5 +21,10 @@ namespace WebAPINet4.Controllers
         {
             return Ok(_db.GetAllEmployees());
         }
+        [Route("api/orders")]
+        public IHttpActionResult GetOrders(int EmployeeID)
+        {
+            return Ok(_db.GetOrdersByEmployeeID(EmployeeID));
+        }
     }
 }

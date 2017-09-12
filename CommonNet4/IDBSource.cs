@@ -13,5 +13,6 @@ namespace CommonNet4
         List<DTO.Employee> GetAllEmployees();
         List<DTO.Order> GetAllOrders();
         List<DTO.Order> GetOrderByEmployee(String firstName, String lastName);
+        List<DTO.Order> GetOrdersByEmployeeID(int employeeID);
     }
 }

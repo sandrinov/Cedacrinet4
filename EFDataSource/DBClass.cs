@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommonNet4.DTO;
 
 namespace EFDataSource
 {
@@ -72,6 +73,23 @@ namespace EFDataSource
                 dtoList.Add(ordFactory.GetDTO(item));
             }
             return dtoList;
+        }
+
+        public List<CommonNet4.DTO.Order> GetOrdersByEmployeeID(int employeeID)
+        {
+            List<CommonNet4.DTO.Order> lstOrders = new List<CommonNet4.DTO.Order>();
+            var employee = ctx.Employees
+                               .Where(e => e.EmployeeID == employeeID)
+                               .FirstOrDefault();
+            if (employee != null)
+            {
+                var lstEntities = employee.Orders.ToList();
+                foreach (var entity in lstEntities)
+                {
+                    lstOrders.Add(ordFactory.GetDTO(entity));
+                }
+            }
+            return lstOrders;
         }
     }
 }

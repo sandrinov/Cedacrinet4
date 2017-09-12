@@ -31,5 +31,10 @@ namespace CommonNet4
         {
             throw new NotImplementedException();
         }
+
+        public List<Order> GetOrdersByEmployeeID(int employeeID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformNet4", "WinformNet4\WinformNet4.csproj", "{9F78097F-150C-4584-9F42-15526DDE13A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleNet4", "ConsoleNet3\ConsoleNet4.csproj", "{7E51C09B-BB17-41FB-A52B-2CF74E6CCAE0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateSample", "DelegateSample\DelegateSample.csproj", "{B74346D2-D16D-4536-B623-686A1F68E995}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{73431256-BCD9-41CE-B983-83AFBCD75BD8}"
@@ -35,10 +33,6 @@ Global
 		{9F78097F-150C-4584-9F42-15526DDE13A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F78097F-150C-4584-9F42-15526DDE13A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F78097F-150C-4584-9F42-15526DDE13A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E51C09B-BB17-41FB-A52B-2CF74E6CCAE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E51C09B-BB17-41FB-A52B-2CF74E6CCAE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E51C09B-BB17-41FB-A52B-2CF74E6CCAE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E51C09B-BB17-41FB-A52B-2CF74E6CCAE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B74346D2-D16D-4536-B623-686A1F68E995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B74346D2-D16D-4536-B623-686A1F68E995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B74346D2-D16D-4536-B623-686A1F68E995}.Release|Any CPU.ActiveCfg = Release|Any CPU
