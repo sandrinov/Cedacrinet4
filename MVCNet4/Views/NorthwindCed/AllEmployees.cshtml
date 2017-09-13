@@ -54,14 +54,14 @@
         </table>
     </div>
     <div class="col-sm-6">
-        <p>List of Orders</p>
+        <p>List of Orders ( pag <span id="pagenumber">2</span> of <span id="oftotalpages">10</span>)</p>
         <ul id="lst_orders"></ul>
         <div>
-            <button type="button" class="btn btn-default btn-sm">
+            <button id="btn_left" type="button" disabled class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-chevron-left"></span> Left
             </button>
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-chevron-right"></span> Left
+            <button id="btn_right" type="button" disabled class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-chevron-right"></span> Right
             </button>
         </div>
     </div>
@@ -75,6 +75,10 @@
         $('th:first').addClass('hidden_element');
         $('tr td:first-child').addClass('hidden_element');
 
+        var currentPage = 1;
+        var recordsCount = 0;
+        var size = 10;
+
         $('.pointerlike').click(function () {
             var $tr = $(this).closest('tr');
             var employeeid = $tr.find('td').first().text().trim();
@@ -83,24 +87,123 @@
 
             $.ajax({
                 cache: false,
-                type: "GET",
-                url: server_url + 'api/orders?EmployeeID=' + employeeid,
-            }).done(function (orders) {
-                $('#lst_orders').empty();
-                $.each(orders, function (i, order) {
-                    $('#lst_orders').append(
-                        '<li>' +
-                        order.ShipName +
-                        ' ' +
-                        order.ShipAddress +
-                        ' ' +
-                        order.ShipCity +
-                        '</li>');
+                type: 'GET',
+                url: server_url + 'api/orderscount?EmployeeID=' + employeeid
+            }).done(function (count) {
+                recordsCount = count;
+                if (recordsCount == 0) {
+                    alert('No orders for this employee');
+                }
+                else {                
+                    //call page number 1
+                    var params = '?EmployeeID=' + employeeid + '&page=' + currentPage + '&size=' + size;
+                    $.ajax({
+                        cache: false,
+                        type: 'GET',
+                        url: server_url + 'api/orders' + params
+                    }).done(function (orders) {
+                        $('#lst_orders').empty();
+                        $.each(orders, function (i, order) {
+                            $('#lst_orders').append(
+                                '<li>' +
+                                order.ShipName +
+                                ' ' +
+                                order.ShipAddress +
+                                ' ' +
+                                order.ShipCity +
+                                '</li>');
+                        }); // end foreach
 
-                });
+                        if (recordsCount > size * currentPage)
+                            $('#btn_right').prop('disabled', '');
+                        $('#pagenumber').text(1);
+                        $('#oftotalpages').text(Math.ceil(recordsCount / size));
+                    });// end count ajax done
+                }; // end else
+
+                $('#btn_left').click(function () {
+                    var params = '?EmployeeID=' + employeeid + '&page=' + (currentPage - 1) + '&size=' + size;
+                    $.ajax({
+                        cache: false,
+                        type: 'GET',
+                        url: server_url + 'api/orders' + params
+                    }).done(function (orders) {
+                        $('#lst_orders').empty();
+                        $.each(orders, function (i, order) {
+                            $('#lst_orders').append(
+                                '<li>' +
+                                order.ShipName +
+                                ' ' +
+                                order.ShipAddress +
+                                ' ' +
+                                order.ShipCity +
+                                '</li>');
+                        }); // end foreach
+                        currentPage--;
+                        $('#pagenumber').text(currentPage);
+                        $('#btn_right').prop('disabled', '');
+
+                        if (currentPage == 1)
+                            $('#btn_left').prop('disabled', 'disabled');
+                    });
+
+                });//end button left click
+
+                $('#btn_right').click(function () {
+
+                    var params = '?EmployeeID=' + employeeid + '&page=' + (currentPage + 1) + '&size=' + size;
+                    $.ajax({
+                        cache: false,
+                        type: 'GET',
+                        url: server_url + 'api/orders' + params
+                    }).done(function (orders) {
+                        $('#lst_orders').empty();
+                        $.each(orders, function (i, order) {
+                            $('#lst_orders').append(
+                                '<li>' +
+                                order.ShipName +
+                                ' ' +
+                                order.ShipAddress +
+                                ' ' +
+                                order.ShipCity +
+                                '</li>');
+                        }); // end foreach
+                        currentPage++;
+                        $('#pagenumber').text(currentPage);
+                        if (currentPage * size >= recordsCount)
+                            $('#btn_right').prop('disabled', 'disabled');
+                        if (currentPage > 1)
+                            $('#btn_left').prop('disabled', '');
+                    });
+                });// end btn_right click
+
+                
             });// end done
-        });
-    });
+
+             //$.ajax({
+            //    cache: false,
+            //    type: "GET",
+            //    url: server_url + 'api/orders?EmployeeID=' + employeeid,
+            //}).done(function (orders) {
+            //    $('#lst_orders').empty();
+
+            //    $.each(orders, function (i, order) {
+            //        $('#lst_orders').append(
+            //            '<li>' +
+            //            order.ShipName +
+            //            ' ' +
+            //            order.ShipAddress +
+            //            ' ' +
+            //            order.ShipCity +
+            //            '</li>');
+
+            //    });
+            //});// end done
+
+
+
+        });// end click handler
+    });//end ajax
 
 
 </script>

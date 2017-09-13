@@ -91,5 +91,43 @@ namespace EFDataSource
             }
             return lstOrders;
         }
+
+        public List<CommonNet4.DTO.Order> GetOrdersByEmployeeID(int employeeID, int page, int size)
+        {
+            List<CommonNet4.DTO.Order> lstOrders = new List<CommonNet4.DTO.Order>();
+            var employee = ctx.Employees
+                           .Where(e => e.EmployeeID == employeeID)
+                           .FirstOrDefault();
+            if (employee != null)
+            {
+                var lstEntities = employee.Orders
+                                          .OrderBy(o=>o.OrderDate)
+                                          .ThenBy(o => o.OrderID)
+                                          .Skip(size * (page - 1))
+                                          .Take(size)
+                                          .ToList();
+
+
+                foreach (var entity in lstEntities)
+                {
+                    lstOrders.Add(ordFactory.GetDTO(entity));
+                }
+            }
+            return lstOrders;
+
+        }
+
+        public int GetOrdersCountByEmployeeID(int employeeID)
+        {
+            int count = 0;
+            var employee = ctx.Employees
+                          .Where(e => e.EmployeeID == employeeID)
+                          .FirstOrDefault();
+            if (employee != null)
+            {
+                count = employee.Orders.Count;
+            }
+            return count;
+        }
     }
 }
